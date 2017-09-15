@@ -22,6 +22,7 @@
     command: 
       - tar xvf $VH_INPUTS_DIR/thumbs/thumbs-0915.tar
       - ls -lah $VH_INPUTS_DIR/thumbs/
+      - md5sum $VH_INPUTS_DIR/weights/yolo.weights
       - mkdir -p backup
       - /darknet/darknet detector train data/obj.data cfg/thumbs-iso.cfg $VH_INPUTS_DIR/weights/yolo.weights
       - cp -av data/backup $VH_OUTPUTS_DIR
