@@ -6,13 +6,13 @@
     #image: tensorflow/tensorflow:1.3.0-gpu-py3
     #image: valohai/darknet:b61bcf5-cuda8.0-cudnn5-devel-ubuntu16.04
     command: 
-      - tar xvf $VH_INPUTS_DIR/thumb.tar
-      - mkdir thumb/backup
+      - tar xvf $VH_INPUTS_DIR/thumbs/thumbs.tar
+      - mkdir thumbs/backup
       - /darknet/darknet detector train thumbs/data/obj.data cfg/thumb.cfg $VH_INPUTS_DIR/weights/tiny-yolo.weights
-      - cp -av thumb/backup $VH_OUTPUTS_DIR
+      - cp -av thumbs/backup $VH_OUTPUTS_DIR
     inputs:
-      - name: thumb
-        default: http://k.moonq.org/pub/thumb.tar
+      - name: thumbs
+        default: http://k.moonq.org/pub/thumbs.tar
       - name: weights
         default: http://k.moonq.org/pub/tiny-yolo.weights
 
