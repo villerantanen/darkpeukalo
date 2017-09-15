@@ -7,7 +7,7 @@
     #image: valohai/darknet:b61bcf5-cuda8.0-cudnn5-devel-ubuntu16.04
     command: 
       - tar xvf $VH_INPUTS_DIR/thumbs/thumbs.tar
-      - mkdir thumbs/backup
+      - mkdir -p thumbs/backup
       - /darknet/darknet detector train thumbs/data/obj.data cfg/thumbs.cfg $VH_INPUTS_DIR/weights/tiny-yolo.weights
       - cp -av thumbs/backup $VH_OUTPUTS_DIR
     inputs:
@@ -15,6 +15,22 @@
         default: http://k.moonq.org/pub/thumbs.tar
       - name: weights
         default: http://k.moonq.org/pub/tiny-yolo.weights
+
+- step:
+    name: Train big
+    image: valohai/darknet:b61bcf5-cuda8.0-cudnn5-devel-ubuntu16.04
+    command: 
+      - tar xvf $VH_INPUTS_DIR/thumbs/thumbs.tar
+      - ls -la $VH_INPUTS_DIR/thumbs/thumbs.tar
+      - mkdir -p data/backup
+      - /darknet/darknet detector train data/obj.data cfg/thumbs.cfg $VH_INPUTS_DIR/weights/yolo.weights
+      - cp -av data/backup $VH_OUTPUTS_DIR
+    inputs:
+      - name: thumbs
+        default: http://k.moonq.org/pub/thumbs.tar
+      - name: weights
+        default: http://k.moonq.org/pub/yolo.weights
+
 
 - step:
     name: Worker environment check
