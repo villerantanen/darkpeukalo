@@ -8,7 +8,7 @@
     command: 
       - tar xvf $VH_INPUTS_DIR/thumbs/thumbs.tar
       - mkdir thumbs/backup
-      - /darknet/darknet detector train thumbs/data/obj.data cfg/thumb.cfg $VH_INPUTS_DIR/weights/tiny-yolo.weights
+      - /darknet/darknet detector train thumbs/data/obj.data cfg/thumbs.cfg $VH_INPUTS_DIR/weights/tiny-yolo.weights
       - cp -av thumbs/backup $VH_OUTPUTS_DIR
     inputs:
       - name: thumbs
