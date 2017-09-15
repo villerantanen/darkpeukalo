@@ -22,7 +22,7 @@
     command: 
       - tar xvf $VH_INPUTS_DIR/thumbs/thumbs-0915.tar
       - ls -lah $VH_INPUTS_DIR/thumbs/
-      - mkdir -p data/backup
+      - mkdir -p backup
       - /darknet/darknet detector train data/obj.data cfg/thumbs-iso.cfg $VH_INPUTS_DIR/weights/yolo.weights
       - cp -av data/backup $VH_OUTPUTS_DIR
     inputs:
@@ -30,6 +30,21 @@
         default: http://k.moonq.org/pub/thumbs-0915.tar
       - name: weights
         default: http://k.moonq.org/pub/yolo.weights
+
+- step:
+    name: Train small
+    image: valohai/darknet:b61bcf5-cuda8.0-cudnn5-devel-ubuntu16.04
+    command: 
+      - tar xvf $VH_INPUTS_DIR/thumbs/thumbs-0915.tar
+      - ls -lah $VH_INPUTS_DIR/thumbs/
+      - mkdir -p backup
+      - /darknet/darknet detector train data/obj.data cfg/thumbs.cfg $VH_INPUTS_DIR/weights/tiny-yolo.weights
+      - cp -av data/backup $VH_OUTPUTS_DIR
+    inputs:
+      - name: thumbs
+        default: http://k.moonq.org/pub/thumbs-0915.tar
+      - name: weights
+        default: http://k.moonq.org/pub/tiny-yolo.weights
 
 
 - step:
