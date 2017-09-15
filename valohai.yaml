@@ -1,27 +1,12 @@
 ---
 
 - step:
-    name: Train model from scratch
-    image: valohai/darknet:b61bcf5-cuda8.0-cudnn5-devel-ubuntu16.04
-    #image: tensorflow/tensorflow:1.3.0-gpu-py3
-    #image: valohai/darknet:b61bcf5-cuda8.0-cudnn5-devel-ubuntu16.04
-    command: 
-      - tar xvf $VH_INPUTS_DIR/thumbs/thumbs.tar
-      - mkdir -p thumbs/backup
-      - /darknet/darknet detector train thumbs/data/obj.data cfg/thumbs.cfg $VH_INPUTS_DIR/weights/tiny-yolo.weights
-      - cp -av thumbs/backup $VH_OUTPUTS_DIR
-    inputs:
-      - name: thumbs
-        default: http://k.moonq.org/pub/thumbs.tar
-      - name: weights
-        default: http://k.moonq.org/pub/tiny-yolo.weights
-
-- step:
     name: Train big
     image: valohai/darknet:b61bcf5-cuda8.0-cudnn5-devel-ubuntu16.04
     command: 
       - tar xvf $VH_INPUTS_DIR/thumbs/thumbs-0915.tar
       - md5sum $VH_INPUTS_DIR/weights/yolo.weights
+      - mkdir  $VH_OUTPUTS_DIR/backup 
       - ln -s $VH_OUTPUTS_DIR/backup backup
       - ls -lah $VH_INPUTS_DIR/thumbs/
       - ls -lah
@@ -38,6 +23,7 @@
     command: 
       - tar xvf $VH_INPUTS_DIR/thumbs/thumbs-0915.tar
       - ls -lah $VH_INPUTS_DIR/thumbs/
+      - mkdir $VH_OUTPUTS_DIR/backup 
       - ln -s $VH_OUTPUTS_DIR/backup backup
       - /darknet/darknet detector train data/obj.data cfg/thumbs.cfg $VH_INPUTS_DIR/weights/tiny-yolo.weights
     inputs:
