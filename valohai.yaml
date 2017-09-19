@@ -18,6 +18,24 @@
         default: http://k.moonq.org/pub/darknet19_448.conv.23
 
 - step:
+    name: Train big more
+    image: valohai/darknet:b61bcf5-cuda8.0-cudnn5-devel-ubuntu16.04
+    command: 
+      - set -x
+      - tar xvf $VH_INPUTS_DIR/thumbs/thumbs-0919.tar
+      - mkdir  $VH_OUTPUTS_DIR/backup 
+      - ln -s $VH_OUTPUTS_DIR/backup backup
+      - ls -lah $VH_INPUTS_DIR/thumbs/
+      - ls -lah
+      - /darknet/darknet detector train data/obj.data cfg/thumbs-iso.cfg $VH_INPUTS_DIR/weights/thumbs-iso_13000.weights
+    inputs:
+      - name: thumbs
+        default: http://k.moonq.org/pub/thumbs-0919.tar
+      - name: weights
+        default: http://k.moonq.org/pub/thumbs-iso_13000.weights
+
+
+- step:
     name: Train small
     image: valohai/darknet:b61bcf5-cuda8.0-cudnn5-devel-ubuntu16.04
     command: 
