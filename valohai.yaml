@@ -64,7 +64,7 @@
     image: valohai/darknet:b61bcf5-cuda8.0-cudnn5-devel-ubuntu16.04
     command: 
       - set -x
-      - tar xvf $VH_INPUTS_DIR/trees/tree_data.tar
+      - tar xvf $VH_INPUTS_DIR/trees/tree-data-0926.tar
       - mkdir  $VH_OUTPUTS_DIR/backup 
       - ln -s $VH_OUTPUTS_DIR/backup backup
       - ls -lah $VH_INPUTS_DIR/trees/
@@ -72,7 +72,7 @@
       - /darknet/darknet detector train data/obj.data cfg/trees.cfg $VH_INPUTS_DIR/weights/darknet19_448.conv.23
     inputs:
       - name: trees
-        default: http://k.moonq.org/pub/tree_data.tar
+        default: http://k.moonq.org/pub/tree-data-0926.tar
       - name: weights
         default: http://k.moonq.org/pub/darknet19_448.conv.23
 
