@@ -76,4 +76,21 @@
       - name: weights
         default: http://k.moonq.org/pub/darknet19_448.conv.23
 
+- step:
+    name: TrainMoreTrees
+    image: valohai/darknet:b61bcf5-cuda8.0-cudnn5-devel-ubuntu16.04
+    command: 
+      - set -x
+      - tar xvf $VH_INPUTS_DIR/trees/tree-data-0926.tar
+      - mkdir  $VH_OUTPUTS_DIR/backup 
+      - ln -s $VH_OUTPUTS_DIR/backup backup
+      - ls -lah $VH_INPUTS_DIR/trees/
+      - ls -lah
+      - /darknet/darknet detector train data/obj.data cfg/trees.cfg $VH_INPUTS_DIR/weights/trees_6000.weights
+    inputs:
+      - name: trees
+        default: http://k.moonq.org/pub/tree-data-0926.tar
+      - name: weights
+        default: http://k.moonq.org/pub/trees_6000.weights
+
 
